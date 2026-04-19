@@ -14,6 +14,7 @@ const todosSlice = createSlice({
         state.push(action.payload);
       },
 
+
       prepare(text) {
         return {
           payload: {
@@ -24,9 +25,19 @@ const todosSlice = createSlice({
         };
       },
     },
+    removeTodo: {
+      reducer(state, action) {
+        return state.filter(todo => todo.id !== action.payload)
+      },
+      prepare(id) {
+        return {
+          payload: id
+        }
+      }
+    }
   },
 });
 
-export const { addTodo } = todosSlice.actions;
+export const { addTodo, removeTodo } = todosSlice.actions;
 
 export const todosReducer = todosSlice.reducer;
